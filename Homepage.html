@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juchi Stores</title>
+    <link rel="stylesheet" href="Homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+</head>
+<body>
+
+    <!-- Header Section -->
+<header>
+    <div class="contact-wrapper">
+        <div class="contact-info">
+            <p><i class="fas fa-phone"></i> 08069766777</p>
+            <span>|</span>
+            <p><i class="fas fa-envelope"></i> owoblow@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="logo-menu">
+        <div class="logo">
+            <a href="Homepage.html">
+                <img src="juchi store.png" alt="Juchi Stores Logo" width="80" height="50"/>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li class="menu-dropdown">
+                    <span class="menu-link">Menu</span>
+                    <!-- Dropdown List -->
+                    <ul class="dropdown-list">
+                        <li><a href="bar-soaps.html">Bar Soaps</a></li>
+                        <li><a href="liquid-detergents.html">Liquid & Detergents</a></li>
+                        <li><a href="body-healthcare.html">Body & Healthcare</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="ContactUs.html" class="contact-link">Contact Us</a>
+                </li>                    
+            </ul>
+        </nav>
+
+        <div class="icons">
+            <i class="fas fa-search" id="search-icon"></i> <!-- Search icon triggers popup -->
+            <i class="fas fa-user" id="userIcon"></i> <!-- User icon -->
+        
+        <!-- Search popup, initially hidden -->
+        <div id="search-popup" style="display:none;" class="search-popup">
+            <input type="text" id="searchInput" placeholder="Search for products...">
+            <button id="searchButton">Search</button>
+            <div id="searchResult"></div>
+        </div>
+            <!-- Wishlist Icon in the Header -->
+            <div class="wishlist">
+                <i class="fas fa-heart" id="wishlist-icon"></i>
+                <span class="wishlist-count">0</span> <!-- Wishlist Count -->
+                <!-- Wishlist Popup that appears on click -->
+                <div class="wishlist-popup" id="wishlist-popup">
+                    <span class="close-btn">&times;</span> <!-- Close button -->
+                    <h2>Wishlist</h2>
+                    <button id="add-all-to-cart">Add All to Cart</button>
+                    <div id="wishlist-items-container">
+                        <!-- Wishlist items will be inserted dynamically here -->
+                    </div>
+                    <div class="wishlist-empty" id="wishlist-empty" style="display: none;">
+                        <p>Your wishlist is empty</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Icon in the Header -->
+            <div class="cart">
+                <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                <span class="cart-count">0</span> <!-- Cart Count -->
+                <!-- Cart Popup that appears on click -->
+                <div class="cart-popup" id="cart-popup">
+                    <span class="close-btn">&times;</span> <!-- Close button -->
+                    <h2>Basket</h2>
+                    <div id="cart-items-container">
+                        <!-- Items will be inserted dynamically here -->
+                    </div>
+
+                    <div id="cart-empty" style="display: none;">Your cart is empty</div>
+                    <div id="cart-total" style="display: none;">
+                        <span>Total: </span><span id="total-amount">₦0.00</span>
+                    </div>
+                    <button id="go-to-payment" style="display: none;">Go to Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Bar Popup (Initially Hidden) -->
+    <div id="search-popup" class="search-popup">
+        <span class="close-btn">&times;</span> <!-- Close button -->
+        <input type="text" placeholder="Search products..." id="search-bar">
+        <button id="search-btn">Search</button>
+    </div>
+
+   <!-- Login Popup Modal -->
+<div id="loginModal" class="login-modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span> <!-- Close Button -->
+        <h2>Login into your account</h2>
+        <form id="loginForm">
+            <div class="input-field">
+                <label for="loginID">Email Address</label>
+                <input type="text" id="loginID" placeholder="Email Address" required>
+            </div>
+            <div class="input-field">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="toggle-password" id="toggleLoginPassword">👁️</span> <!-- Eye icon for password visibility -->
+                </div>
+            </div>
+            <div class="extra-options">
+                <a href="#" class="forgot-password">Forgotten password?</a>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <p>Don't have an account? <a href="#" id="openSignup">Create account</a></p>
+        </form>
+        <div id="message" class="message"></div> <!-- Popup message area -->
+    </div>
+</div>
+<p id="welcomeMessageArea"></p> <!-- Add this in your HTML -->
+<!-- User profile display, hidden by default -->
+<div id="userProfileDisplay" style="display: none;"></div>
+
+<!-- Signup Popup Modal -->
+<div id="signupModal" class="signup-modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span> <!-- Close Button -->
+        <h2>Create Your Account</h2>
+        <form id="signupForm">
+            <div class="input-field">
+                <label for="signupName">Name</label>
+                <input type="text" id="signupName" placeholder="Your Name" required>
+            </div>
+            <div class="input-field">
+                <label for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" placeholder="Email Address" required>
+            </div>
+            <div class="input-field">
+                <label for="signupPassword">Password</label>
+                <div class="password-container">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <span class="toggle-password" id="toggleSignupPassword">👁️</span> <!-- Eye icon for password visibility -->
+                </div>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+            <p>Already have an account? <a href="#" id="openLogin">Login</a></p>
+        </form>
+        <div id="signupMessage" class="message"></div> <!-- Popup message area -->
+    </div>
+</div>
+
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <a href="Homepage.html">
+        <img src="Juchi Stores1.png" alt="Hero Image">
+        </a>
+    </section>
+
+  <!-- Sale Section -->
+<section class="promo">
+    <h2>Sale</h2>
+    <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product">
+            <div class="discount">-30%</div>
+            <img src="waw-multi-purpose-soap.png" alt="WAW Multi-Purpose Soap">
+            <p class="product-name">WAW Multi-Purpose Soap</p>
+            <p class="price">
+                <span class="original-price">₦500.00</span> ₦350.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="WAW Multi-Purpose Soap"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="WAW Multi-Purpose Soap"></i>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+            <div class="discount">-15%</div>
+            <img src="eva-bathing-soap.png" alt="Eva Bathing Soap">
+            <p class="product-name">Eva Bathing Soap</p>
+            <p class="price">
+                <span class="original-price">₦650.00</span> ₦550.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Eva Bathing Soap"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Eva Bathing Soap"></i>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product">
+            <div class="discount">-16%</div>
+            <img src="2sure-dishwashing-liquid.png" alt="2Sure Dishwashing Liquid">
+            <p class="product-name">2Sure Dishwashing Liquid</p>
+            <p class="price">
+                <span class="original-price">₦950.00</span> ₦800.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="2Sure Dishwashing Liquid"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="2Sure Dishwashing Liquid"></i>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product">
+            <div class="discount">-22%</div>
+            <img src="so-klin-detergent.png" alt="So Klin Detergent">
+            <p class="product-name">So Klin Detergent</p>
+            <p class="price">
+                <span class="original-price">₦1,600.00</span> ₦1,250.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="So Klin Detergent"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="So Klin Detergent"></i>
+            </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product">
+            <div class="discount">-17%</div>
+            <img src="sunlight-2-in-1-handwashing-powder.png" alt="Sunlight 2 in 1 Handwashing Powder">
+            <p class="product-name">Sunlight 2 in 1 Handwashing Powder</p>
+            <p class="price">
+                <span class="original-price">₦1,500.00</span> ₦1,250.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Sunlight 2 in 1 Handwashing Powder"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Sunlight 2 in 1 Handwashing Powder"></i>
+            </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product">
+            <div class="discount">-13%</div>
+            <img src="viva-plus-detergent-powder.png" alt="Viva Plus Detergent Powder">
+            <p class="product-name">Viva Plus Detergent Powder</p>
+            <p class="price">
+                <span class="original-price">₦1,500.00</span> ₦1,300.00
+            </p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Viva Plus Detergent Powder"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Viva Plus Detergent Powder"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- New Products Section -->
+<section class="new-products">
+    <h2>New Products</h2>
+    <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="cleanmax.png" alt="Cleanmax Sparkle Anti-Bacterial Hand Wash">
+            <p class="product-name">Cleanmax Sparkle Anti-Bacterial Hand Wash</p>
+            <p class="newPrice">₦600.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Cleanmax Sparkle Anti-Bacterial Hand Wash"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Cleanmax Sparkle Anti-Bacterial Hand Wash"></i>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="familia-tissue.png" alt="Familia Toilet Tissue">
+            <p class="product-name">Familia Toilet Tissue</p>
+            <p class="newPrice">₦250.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Familia Toilet Tissue"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Familia Toilet Tissue"></i>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="laundry-basket.png" alt="Laundry Basket">
+            <p class="product-name">Laundry Basket</p>
+            <p class="newPrice">₦750.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Laundry Basket"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Laundry Basket"></i>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product">
+            <img src="black-facial-mask.png" alt="Black Facial Mask">
+            <p class="product-name">Black Facial Mask</p>
+            <p class="newPrice">₦1,500.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Black Facial Mask"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Black Facial Mask"></i>
+            </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product">
+            <img src="cerave-cleanser.png" alt="Cerave Acne Control Cleanser">
+            <p class="product-name">Cerave Acne Control Cleanser</p>
+            <p class="newPrice">₦2,000.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Cerave Acne Control Cleanser"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Cerave Acne Control Cleanser"></i>
+            </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product">
+            <img src="olay-lotion.png" alt="Olay Lotion">
+            <p class="product-name">Olay Lotion</p>
+            <p class="newPrice">₦2,500.00</p>
+            <div class="iconProducts">
+                <i class="fas fa-heart add-to-wishlist" data-product="Olay Lotion"></i>
+                <i class="fas fa-shopping-cart add-to-cart" data-product="Olay Lotion"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer Section -->
+<footer>
+    <div class="footer-columns">
+        <div class="column">
+            <h4>Commercial Terms</h4>
+            <p>Shipping Policy</p>
+            <p>General Conditions</p>
+        </div>
+        <div class="column">
+            <h4>Return to</h4>
+            <p>Return of Goods</p>
+            <p>Replacement of Goods</p>
+            <p>Blog</p>
+        </div>
+        <div class="column">
+            <h4>Legal Information</h4>
+            <p>Terms and Conditions</p>
+            <p>Privacy Policy</p>
+        </div>
+        <div class="column">
+            <h4>About the online store</h4>
+            <p>Reviews</p>
+            <p>FAQ</p>
+        </div>
+        <div class="column">
+            <h4>About Us</h4>
+            <p>About Us</p>
+            <p>Our Team</p>
+        </div>
+        <div class="column">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-phone"></i> 08069766723</p>
+            <p><i class="fas fa-envelope"></i> chionwuemene@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> House 2, P Close, 5th Avenue, Festac Town, Amuwo Odofin LGA, Lagos</p>
+        </div>
+    </div>
+    <div class="payment-section">
+        <div class="payment-info">
+            <p>Payment Methods</p>
+            <img src="mastercard-logo.png" alt="MasterCard" class="payment-logo">
+            <img src="visa.png" alt="Visa" class="payment-logo">
+        </div>
+    </div>
+    
+    </div>
+    <div class="bottom-footer">
+        <p>2024 Juchi Stores | All rights reserved</p>
+        <p>Consent Management</p>
+        <p>Site by ZAINAB OWOLABI</p> 
+    </div>
+</footer>
+
+    <script src="Homepagee.js"></script>
+</body>
+</html>

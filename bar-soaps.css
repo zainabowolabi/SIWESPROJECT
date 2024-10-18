@@ -1,0 +1,99 @@
+/* Main shop container styling */
+.shop-container {
+    display: flex;
+    flex-direction: column; /* Stack filter and product sections vertically */
+    padding: 20px;
+}
+
+/* Page title styling */
+.page-title {
+    font-size: 24px; /* Larger font size for the title */
+    margin-bottom: 20px; /* Spacing below the title */
+}
+
+/* Shop layout styling */
+.shop-layout {
+    display: flex; /* Horizontal layout for filter and product sections */
+}
+
+/* Filter section styling */
+.filter-section {
+    width: 25%; /* Adjust filter width */
+    padding: 10px;
+    margin-right: 10px; /* Reduced space between filter and product sections */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Product section styling */
+.product-section {
+    flex: 1; /* Take remaining space */
+    max-width: 100%; /* Set max width for the product section */
+}
+
+/* Product header styling */
+.product-header {
+    display: flex;
+    justify-content: space-between; /* Aligns content to the ends */
+    align-items: center; /* Aligns items vertically */
+    margin-top: 20px; /* Space above the product header */
+}
+
+/* Product count styling */
+.product-count p {
+    font-size: 20px; /* Larger font size for "5 products found" */
+    margin: 0; /* Remove margin */
+}
+
+/* Sort by styling */
+.sort-by {
+    display: flex;
+    flex-direction: column; /* Stack sort label and select vertically */
+    align-items: flex-end; /* Align to the right */
+    margin-left: auto; /* Push to the right */
+}
+
+.sort-by label {
+    font-size: 14px; /* Smaller font size for sort label */
+    margin-bottom: 5px; /* Space below the label */
+}
+
+
+
+/* Apply button styling */
+.apply-btn {
+    padding: 10px 15px; /* Padding for button */
+    background-color: #007bff; /* Button color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 12px; /* Font size for button */
+    transition: background-color 0.3s; /* Smooth transition */
+    width: 30%;
+}
+
+/* Hover effect for the apply button */
+.apply-btn:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
+/* Filter header styling - aligns "Filter by" and "Clear all" */
+.filter-header {
+    display: flex;
+    justify-content: space-between; /* Places "Filter by" on the left and "Clear all" on the right */
+    align-items: center; /* Vertically centers the content */
+    margin-bottom: 10px; /* Space below the filter header */
+}
+
+/* Styling for the min and max input fields */
+.filter-range {
+    display: flex;
+    flex-direction: column; /* Stack "min" and "max" vertically */
+    gap: 10px; /* Space between min and max inputs */
+}
+
+.min-max-container {
+    display: flex;
+    flex-direction: column; /* Ensure that both inputs are vertically stacked */
+}

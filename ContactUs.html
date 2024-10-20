@@ -8,108 +8,162 @@
     <link rel="stylesheet" href="ContactUs.css"> <!-- Link to your CSS file for this page -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="ContactUs.js" defer></script> <!-- Link to your JS file -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="index.js"></script>
+
 </head>
 <body>
-       <!-- Header Section -->
-<header>
-    <div class="contact-wrapper">
-        <div class="contact-info">
-            <p><i class="fas fa-phone"></i> 08069766777</p>
-            <span>|</span>
-            <p><i class="fas fa-envelope"></i> owoblow@gmail.com</p>
+
+        <!-- Header Section -->
+    <header>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> 08069766777</p>
+                <span>|</span>
+                <p><i class="fas fa-envelope"></i> owoblow@gmail.com</p>
+            </div>
         </div>
-    </div>
     
-    <div class="logo-menu">
-        <div class="logo">
-            <a href="Homepage.html">
-            <img src="juchi store.png" alt="Juchi Stores Logo" width="80" height="50"/>
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li class="menu-dropdown">
-                    <span class="menu-link">Menu</span>
-                    <!-- Dropdown List -->
-                    <ul class="dropdown-list">
-                        <li><a href="bar-soaps.html">Bar Soaps</a></li>
-                        <li><a href="liquid-detergents.html">Liquid & Detergents</a></li>
-                        <li><a href="body-healthcare.html">Body & Healthcare</a></li>
-                    </ul>
+        <div class="logo-menu">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="juchi store.png" alt="Juchi Stores Logo" width="80" height="50"/>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="menu-dropdown">
+                        <span class="menu-link">Menu</span>
+                        <!-- Dropdown List -->
+                        <ul class="dropdown-list">
+                            <li><a href="bar-soaps.html">Bar Soaps</a></li>
+                            <li><a href="liquid-detergents.html">Liquid & Detergents</a></li>
+                            <li><a href="body-healthcare.html">Body & Healthcare</a></li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="ContactUs.html" class="contact-link">Contact Us</a>
                     </li>                    
-            </ul>
-        </nav>
-        
-        <div class="icons">
-            <i class="fas fa-search" id="search-icon"></i>
-            <i class="fas fa-user" id="userIcon"></i> <!-- User icon triggers popup -->
-            <div class="wishlist">
-                <a href="wishlist.html" class="wishlist-link">
-                    <i class="fas fa-heart"></i>
-                    <span class="wishlist-count">0</span> <!-- Wishlist Count -->
-                </a>
-            </div>
+                </ul>
+            </nav>
+    
+            <div class="icons">
+                <i class="fas fa-search" id="search-icon"></i> <!-- Search icon triggers popup -->
+                <i class="fas fa-user" id="userIcon"></i> <!-- User icon -->
             
-            <!-- Cart Icon in the Header -->
-<div class="cart">
-    <i class="fas fa-shopping-cart" id="cart-icon"></i>
-    <span class="cart-count">0</span> <!-- Cart Count -->
-    <!-- Cart Popup that appears on click -->
-    <div class="cart-popup" id="cart-popup">
-        <!-- Dynamic Cart Content -->
-        <div id="cart-items-container">
-            <!-- Items will be inserted dynamically here -->
+            <!-- Search popup, initially hidden -->
+            <div id="search-popup" style="display:none;" class="search-popup">
+                <input type="text" id="searchInput" placeholder="Search for products...">
+                <button id="searchButton">Search</button>
+                <div id="searchResult"></div>
+            </div>
+                <!-- Wishlist Icon in the Header -->
+                <div class="wishlist">
+                    <i class="fas fa-heart" id="wishlist-icon"></i>
+                    <span class="wishlist-count">0</span> <!-- Wishlist Count -->
+                    <!-- Wishlist Popup that appears on click -->
+                    <div class="wishlist-popup" id="wishlist-popup" style="display: none;">
+                        <span class="close-btn">&times;</span> <!-- Close button -->
+                        <h2>Wishlist</h2>
+                        <button id="add-all-to-cart">Add All to Cart</button>
+                        <div id="wishlist-items-container">
+                            <!-- Wishlist items will be inserted dynamically here -->
+                        </div>
+                        <div class="wishlist-empty" id="wishlist-empty" style="display: none;">
+                            <p>Your wishlist is empty</p>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <!-- Cart Icon in the Header -->
+                <div class="cart">
+                    <i class="fas fa-shopping-cart" id="cart-icon"></i>
+                    <span class="cart-count">0</span> <!-- Cart Count -->
+                    <!-- Cart Popup that appears on click -->
+                    <div class="cart-popup" id="cart-popup">
+                        <span class="close-btn">&times;</span> <!-- Close button -->
+                        <h2>Basket</h2>
+                        <div id="cart-items-container">
+                            <!-- Items will be inserted dynamically here -->
+                        </div>
+    
+                        <div id="cart-empty" style="display: none;">Your cart is empty</div>
+                        <div id="cart-total" style="display: none;">
+                            <span>Total: </span><span id="total-amount">₦0.00</span>
+                        </div>
+                        <button id="go-to-payment" style="display: none;">Go to Payment</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Total Amount -->
-        <div class="cart-total" id="cart-total" style="display:none;">
-            <p>Total amount</p>
-            <p id="total-amount">₦0.00</p>
+    
+        <!-- Search Bar Popup (Initially Hidden) -->
+        <div id="search-popup" class="search-popup">
+            <span class="close-btn">&times;</span> <!-- Close button -->
+            <input type="text" placeholder="Search products..." id="search-bar">
+            <button id="search-btn">Search</button>
         </div>
-        <button class="go-to-payment" style="display:none;">Go to payment</button>
-        <button class="go-to-basket" style="display:none;">Go to basket</button>
-
-        <!-- When the cart is empty -->
-        <div class="cart-empty" id="cart-empty">
-            <h2>Basket</h2>
-            <p>The basket is empty</p>
+    
+       <!-- Login Popup Modal -->
+    <div id="loginModal" class="login-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span> <!-- Close Button -->
+            <h2>Login into your account</h2>
+            <form id="loginForm">
+                <div class="input-field">
+                    <label for="loginID">Email Address</label>
+                    <input type="text" id="loginID" placeholder="Email Address" required>
+                </div>
+                <div class="input-field">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Password" required>
+                        <span class="toggle-password" id="toggleLoginPassword">👁️</span> <!-- Eye icon for password visibility -->
+                    </div>
+                </div>
+                <div class="extra-options">
+                    <a href="#" class="forgot-password">Forgotten password?</a>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <p>Don't have an account? <a href="#" id="openSignup">Create account</a></p>
+            </form>
+            <div id="message" class="message"></div> <!-- Popup message area -->
         </div>
     </div>
-</div>
-</header>
-
-<!-- Search Bar Popup (Initially Hidden) -->
-<div id="search-popup" class="search-popup">
-    <input type="text" placeholder="Search products..." id="search-bar">
-    <button id="search-btn">Search</button>
-</div>
-<!-- Login Popup Modal -->
-<div id="loginModal" class="login-modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span> <!-- Close Button -->
-        <h2>Login into your account</h2>
-        <form id="loginForm">
-            <div class="input-field">
-                <label for="loginID">Login ID</label>
-                <input type="text" id="loginID" placeholder="Login ID" required>
-            </div>
-            <div class="input-field">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password" required>
-            </div>
-            <div class="extra-options">
-                <a href="#" class="forgot-password">Forgotten password?</a>
-            </div>
-            <button type="submit" class="login-btn">Login</button>
-            <p>Don't have an account? <a href="#">Create account</a></p>
-        </form>
+    <p id="welcomeMessageArea"></p> <!-- Add this in your HTML -->
+    <!-- User profile display, hidden by default -->
+    <div id="userProfileDisplay" style="display: none;"></div>
+    
+    <!-- Signup Popup Modal -->
+    <div id="signupModal" class="signup-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span> <!-- Close Button -->
+            <h2>Create Your Account</h2>
+            <form id="signupForm">
+                <div class="input-field">
+                    <label for="signupName">Name</label>
+                    <input type="text" id="signupName" placeholder="Your Name" required>
+                </div>
+                <div class="input-field">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="Email Address" required>
+                </div>
+                <div class="input-field">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="signupPassword" placeholder="Password" required>
+                        <span class="toggle-password" id="toggleSignupPassword">👁️</span> <!-- Eye icon for password visibility -->
+                    </div>
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+                <p>Already have an account? <a href="#" id="openLogin">Login</a></p>
+            </form>
+            <div id="signupMessage" class="message"></div> <!-- Popup message area -->
+        </div>
     </div>
-
-</div>
-</header>
-
+    
+    </header>
     <!-- Main Content -->
     <main>
         <section class="contact-section">
@@ -187,5 +241,6 @@
 </footer>
 
     <script src="Homepagee.js"></script>
+
 </body>
 </html>

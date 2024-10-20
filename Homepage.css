@@ -650,6 +650,15 @@ button:hover {
     text-decoration: none;
     color: white;
 }
+
+/* Hero Image */
+.hero-image {
+    width: 100vw; /* Make sure it takes the full viewport width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the container */
+    position: relative; /* Allow for positioning within parent */
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1200px) {
     .product-grid {
@@ -673,12 +682,22 @@ button:hover {
     }
 
     .icons {
+        display: flex; /* Ensure icons are displayed in a row */
         justify-content: center; /* Center icons on smaller screens */
+        flex-wrap: wrap; /* Allow icons to wrap if necessary */
+        margin-top: 10px; /* Add some space above icons */
     }
 
     .logo-menu {
         flex-direction: column; /* Stack logo and menu vertically */
         align-items: center; /* Center items */
+        margin-bottom: 10px; /* Space below logo-menu */
+    }
+
+    /* New style for positioning store logo and icons */
+    .store-logo {
+        order: -1; /* Move logo to the top */
+        margin-bottom: 10px; /* Space below the logo */
     }
 }
 

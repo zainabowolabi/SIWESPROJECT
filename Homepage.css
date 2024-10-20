@@ -650,3 +650,48 @@ button:hover {
     text-decoration: none;
     color: white;
 }
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* Change to 4 columns for medium screens */
+    }
+
+    .product {
+        height: auto; /* Allow product height to adjust */
+    }
+}
+
+@media (max-width: 800px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Change to 2 columns for smaller screens */
+    }
+
+    .contact-info {
+        flex-direction: column; /* Stack contact info vertically */
+        padding-left: 0; /* Remove padding for smaller screens */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .icons {
+        justify-content: center; /* Center icons on smaller screens */
+    }
+
+    .logo-menu {
+        flex-direction: column; /* Stack logo and menu vertically */
+        align-items: center; /* Center items */
+    }
+}
+
+@media (max-width: 500px) {
+    .product-name {
+        font-size: 12px; /* Reduce font size for very small screens */
+    }
+
+    .price {
+        font-size: 11px; /* Reduce price font size */
+    }
+
+    .contact-info p {
+        font-size: 12px; /* Smaller text for contact info */
+    }
+}
